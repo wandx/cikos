@@ -1,0 +1,1 @@
+{!! Form::select('roles[]',$all_roles,$selected,['multiple'=>'','class'=>'form-control']) !!}
