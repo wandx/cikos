@@ -7,6 +7,7 @@ use App\Models\Facility;
 use App\Models\Kost;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 class KostCont extends Controller
@@ -23,7 +24,7 @@ class KostCont extends Controller
     public function store(Request $req){
         $data = [
             'name' => $req->name,
-            'slug' => Bo::alphanumeric_filter($req->name),
+            'slug' => Str::slug($req->name),
             'seen' => 0,
             'address' => $req->address,
             'district_id' => $req->district_id,
