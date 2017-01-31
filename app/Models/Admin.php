@@ -30,4 +30,8 @@ class Admin extends Authenticatable
     public function role(){
         return $this->belongsToMany(Role::class);
     }
+
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
 }

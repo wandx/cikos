@@ -18,6 +18,10 @@ class DatabaseSeeder extends Seeder
         $this->call(MenuSubmenuSeed::class);
         $this->call(AdminRole::class);
         $this->call(RoleMenu::class);
+        $this->call(ProvincesTableSeeder::class);
+        $this->call(CitiesTableSeeder::class);
+        $this->call(DistictsTableSeeder::class);
+        $this->call(UserSeeder::class);
         \Illuminate\Database\Eloquent\Model::reguard();
         DB::statement("SET FOREIGN_KEY_CHECKS = 1");
     }

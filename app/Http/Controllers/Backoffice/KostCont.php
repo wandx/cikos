@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Backoffice;
 
 use App\Libs\Bo;
+use App\Models\Admin;
 use App\Models\Facility;
 use App\Models\Kost;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
@@ -18,7 +20,17 @@ class KostCont extends Controller
     }
 
     public function add(){
-
+        $user = Admin::where('id',auth('admin')->user()->id)->with('users')->first();
+        if($user->users != null){
+            $user = $user->users->pluck('name','id');
+        }else{
+            $user = [];
+        }
+        $data = [
+            'users' => $user,
+            'provinces' => Province::pluck('name','id')
+        ];
+        return view('back.kost.add',$data);
     }
 
     public function store(Request $req){

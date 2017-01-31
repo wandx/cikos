@@ -1,7 +1,10 @@
 <?php
     namespace App\Libs;
 
+    use App\Models\City;
+    use App\Models\District;
     use App\Models\Menu;
+    use App\Models\Province;
     use App\Models\Role;
     use App\Models\SubMenu;
     use App\Models\Permission;
@@ -66,5 +69,60 @@
             }
 
             return ($count > 0) ? 1:0;
+        }
+
+        public static function getProvince($selected_province=null){
+            $province = Province::all();
+
+            $li = '<option value="">Select Province</option>';
+            foreach($province as $p){
+                if($selected_province != null){
+                    if($p->id == $selected_province){
+                        $li .= '<option selected value="'.$p->id.'">'.$p->name.'</option>';
+                    }else{
+                        $li .= '<option value="'.$p->id.'">'.$p->name.'</option>';
+                    }
+                }else{
+                    $li .= '<option value="'.$p->id.'">'.$p->name.'</option>';
+                }
+            }
+            return $li;
+        }
+
+        public static function getCity($province_id,$selected_city=null){
+            $city = City::where('province_id',$province_id)->get();
+
+            $li = '<option value="">Select City</option>';
+            foreach ($city as $c){
+                if($selected_city != null){
+                    if($c->id == $selected_city){
+                        $li .= '<option selected value="'.$c->id.'">'.$c->name.'</option>';
+                    }else{
+                        $li .= '<option value="'.$c->id.'">'.$c->name.'</option>';
+                    }
+                }else{
+                    $li .= '<option value="'.$c->id.'">'.$c->name.'</option>';
+                }
+            }
+            return $li;
+        }
+
+        public static function getDistrict($city_id,$selected_district=null){
+            $district = District::where('city_id',$city_id)->get();
+            $li = '<option value="">Select District</option>';
+
+            foreach ($district as $d){
+                if($selected_district != null){
+                    if($d->id == $selected_district){
+                        $li .= '<option selected value="'.$d->id.'">'.$d->name.'</option>';
+                    }else{
+                        $li .= '<option value="'.$d->id.'">'.$d->name.'</option>';
+                    }
+                }else{
+                    $li .= '<option value="'.$d->id.'">'.$d->name.'</option>';
+                }
+            }
+            return $li;
+
         }
     }

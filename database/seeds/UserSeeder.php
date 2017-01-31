@@ -13,6 +13,17 @@ class UserSeeder extends Seeder
     {
         $x = \Faker\Factory::create();
         DB::table('users')->truncate();
+
+        // Admin
+        \Illuminate\Support\Facades\DB::table('users')->insert([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('wandx54'),
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'api_token' => 'wandx545'
+        ]);
+
         for($i=0;$i<100;$i++){
             \Illuminate\Support\Facades\DB::table('users')->insert([
                 'name' => $x->name,

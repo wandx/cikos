@@ -36,6 +36,12 @@ class MenuSubmenuSeed extends Seeder
                 'name' => 'tokenmanager',
                 'display_name' => 'Tokens',
                 'icon' => 'fa fa-lock'
+            ],
+            [
+                'id' => 5,
+                'name' => 'kosts',
+                'display_name' => 'Kosts',
+                'icon' => 'fa fa-building'
             ]
         ]);
         DB::table('sub_menus')->truncate();
@@ -91,6 +97,20 @@ class MenuSubmenuSeed extends Seeder
                 'display_name' => 'Suspended',
                 'icon' => 'fa fa-warning',
                 'menu_id' => 3
+            ],
+            [
+                'id' => 8,
+                'name' => 'add',
+                'display_name' => 'Add',
+                'icon' => 'fa fa-plus',
+                'menu_id' => 5
+            ],
+            [
+                'id' =>9,
+                'name' => 'lists',
+                'display_name' => 'User lists',
+                'icon' => 'fa fa-user',
+                'menu_id' => 5
             ]
 
 

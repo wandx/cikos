@@ -15,6 +15,21 @@ Route::get('/', function () {
     return view('front.master');
 });
 
+// misc
+Route::group(['prefix'=>'misc'],function(){
+    Route::get('getProvince/{province_id?}',function($province_id=null){
+        return \App\Libs\Bo::getProvince($province_id);
+    });
+
+    Route::get('getCity/{province_id}/{selected?}',function($province_id,$selected=null){
+        return \App\Libs\Bo::getCity($province_id,$selected);
+    });
+
+    Route::get('getDistrict/{city_id}/{selected?}',function($city_id,$selected=null){
+        return \App\Libs\Bo::getDistrict($city_id,$selected);
+    });
+});
+
 // Admin
 Route::group(['namespace'=>'Backoffice','prefix'=>'backoffice'],function(){
     // Login page
@@ -91,6 +106,11 @@ Route::group(['namespace'=>'Backoffice','prefix'=>'backoffice'],function(){
             Route::get('suspend/{id}',['as'=>'bo.token.suspend','uses'=>'TokenCont@suspend']);
             Route::get('restore/{id}',['as'=>'bo.token.restore','uses'=>'TokenCont@restore']);
             Route::get('update_limit/{id}/{limit}',['as'=>'bo.token.update_limit','uses'=>'TokenCont@update_limit']);
+        });
+
+        Route::group(['prefix'=>'kosts','middleware'=>'access:kosts'],function(){
+            Route::get('add',['as'=>'bo.kosts.add','uses'=>'KostCont@add']);
+            Route::get('lists',['as'=>'bo.kosts.lists','uses'=>'KostCont@lists']);
         });
     });
 
